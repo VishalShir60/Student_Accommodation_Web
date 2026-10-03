@@ -83,3 +83,23 @@ Open your browser and navigate to:
 
 - **Email**: `rahul@example.com`
 - **Password**: `password123`
+
+---
+
+## Vercel Deployment Instructions
+
+### Method 1: Deploy via Vercel Dashboard (Recommended)
+1. Push your code to your GitHub repository ([`VishalShir60/Student_Accommodation_Web`](https://github.com/VishalShir60/Student_Accommodation_Web)).
+2. Log into your [Vercel Dashboard](https://vercel.com/dashboard).
+3. Click **"+ Create New"** -> **"Project"**.
+4. Select and import your GitHub repository: `Student_Accommodation_Web`.
+5. Keep default build settings (Vercel will automatically read `vercel.json`).
+6. Click **Deploy**.
+
+### Method 2: Deploy via Vercel CLI
+```bash
+npm install -g vercel
+vercel
+```
+Follow the prompts to deploy directly from your local terminal.
+

@@ -24,9 +24,13 @@ try {
     ]);
 } catch (PDOException $e) {
     // Fallback to SQLite if MySQL connection fails
+    // On serverless environments like Vercel, use /tmp if project folder is read-only
     $sqlite_dir = __DIR__ . '/../database';
     if (!is_dir($sqlite_dir)) {
-        mkdir($sqlite_dir, 0755, true);
+        @mkdir($sqlite_dir, 0755, true);
+    }
+    if (!is_dir($sqlite_dir) || !is_writable($sqlite_dir)) {
+        $sqlite_dir = sys_get_temp_dir();
     }
     $sqlite_file = $sqlite_dir . '/student_accommodation.sqlite';
     
