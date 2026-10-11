@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$db_host = getenv('DB_HOST') ?: '127.0.0.1';
+$db_host = getenv('DB_HOST');
 $db_port = getenv('DB_PORT') ?: '3306';
 $db_name = getenv('DB_NAME') ?: 'student_accommodation';
 $db_user = getenv('DB_USER') ?: 'root';
@@ -14,15 +14,23 @@ $db_pass = getenv('DB_PASS') ?: '';
 
 $pdo = null;
 
-try {
-    // Attempt MySQL connection
-    $dsn = "mysql:host={$db_host};port={$db_port};dbname={$db_name};charset=utf8mb4";
-    $pdo = new PDO($dsn, $db_user, $db_pass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false,
-    ]);
-} catch (PDOException $e) {
+// Only attempt MySQL if DB_HOST environment variable is explicitly set
+if (!empty($db_host)) {
+    try {
+        $dsn = "mysql:host={$db_host};port={$db_port};dbname={$db_name};charset=utf8mb4";
+        $pdo = new PDO($dsn, $db_user, $db_pass, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+            PDO::ATTR_TIMEOUT => 3,
+        ]);
+    } catch (PDOException $e) {
+        $pdo = null;
+    }
+}
+
+// Fallback to SQLite if MySQL is not configured or connection failed
+if (!$pdo) {
     // Fallback to SQLite if MySQL connection fails
     // On serverless environments like Vercel, use /tmp if project folder is read-only
     $sqlite_dir = __DIR__ . '/../database';
