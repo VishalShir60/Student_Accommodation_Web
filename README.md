@@ -1,6 +1,6 @@
 # Student Accommodation Web Application
 
-> **Designed & Developed by**: **Vishal Shirsath** (Senior Full-Stack Web Developer)
+> **Designed & Developed by**: **Vishal Shirsath** 
 
 A responsive, full-stack student accommodation platform that enables students and young professionals to explore, view, filter, and shortlist Paying Guest (PG) accommodations, hostels, and co-living spaces across top educational hubs in India including **Nashik**, **Mumbai**, **Pune**, **Bangalore**, and **Delhi**.
 
@@ -20,7 +20,6 @@ A responsive, full-stack student accommodation platform that enables students an
 
 ## Project Overview & Developer Credit
 
-- **Creator & Lead Developer**: **Vishal Shirsath**
 - **Purpose**: Solving the challenge of finding verified, affordable student accommodations near top colleges (KK Wagh, Sandip University, MET, BYK, IIT Bombay, DU North Campus, Symbiosis, etc.).
 
 ---
